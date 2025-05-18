@@ -1,0 +1,60 @@
+/* Realizar un control maestro-esclavo con protocolo I2C de manera que al presionar 4 pulsadores en el maestro se vean reflejados en 4 leds en el esclavo */
+
+#include <Wire.h>
+
+void setup() {
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+  Wire.begin(1);
+  Wire.onReceive(Evento);
+  Serial.begin(9600);
+}
+
+void loop() {
+  delay(100);
+  //Wire.requestFrom(1, 1);
+  //Wire.available();
+}
+
+void Evento(int nose) {
+  while (Wire.available()) {
+    int salida0 = Wire.read();
+    int salida1 = Wire.read();
+    int salida2 = Wire.read();
+    int salida3 = Wire.read();
+    if (salida0 == '1') {
+      digitalWrite(8, HIGH);
+      delay(100);
+    }
+    if (salida0 == '0') {
+      digitalWrite(8, LOW);
+      delay(100);
+    }
+    if (salida1 == '2') {
+      digitalWrite(9, HIGH);
+      delay(100);
+    }
+    if (salida1 == '0') {
+      digitalWrite(9, LOW);
+      delay(100);
+    }
+    if (salida2 == '3') {
+      digitalWrite(10, HIGH);
+      delay(100);
+    }
+    if (salida2 == '0') {
+      digitalWrite(10, LOW);
+      delay(100);
+    }
+    if (salida3 == '4') {
+      digitalWrite(11, HIGH);
+      delay(100);
+    }
+    if (salida3 == '0') {
+      digitalWrite(11, LOW);
+      delay(100);
+    }
+  }
+}
