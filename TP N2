@@ -1,0 +1,42 @@
+/* Realizar el diagrama de flujo y el código de un programa para Arduino que muestre un mensaje
+por el monitor serie y a través de 3 leds, que según la altura de la persona ingresada visualice: si la
+altura es menor que 1,60m es de “baja estatura”, si está entre 1,60m y 1,70m es de “media estatura”
+y si es mayor que 1,70 es de “alta estatura” */
+
+int Ledpin1 = 9;
+int Ledpin2 = 8;
+int Ledpin3 = 10;
+ void setup() {
+  Serial.begin(9600);
+  pinMode(Ledpin1, OUTPUT);
+  pinMode(Ledpin2, OUTPUT); 
+  pinMode(Ledpin3, OUTPUT);
+ }
+ void loop() {
+   Serial.println("dime tu altura");
+   while(Serial.available() == 0) {}
+  float myNumber = Serial.parseFloat();
+  
+  if(myNumber < 1.60) {
+      digitalWrite(Ledpin1, HIGH);
+      digitalWrite(Ledpin2, LOW);
+      digitalWrite(Ledpin3, LOW);
+      Serial.print("eres muy bajo con ");
+      Serial.println(myNumber);
+    }
+    if(myNumber >= 1.60 && myNumber<1.80) {
+      digitalWrite(Ledpin1, LOW);
+      digitalWrite(Ledpin2, HIGH);
+      digitalWrite(Ledpin3, LOW);
+      Serial.print("ta bien con  ");
+      Serial.println(myNumber); 
+    }  
+    if(myNumber >= 1.80) {
+      digitalWrite(Ledpin1, HIGH);
+      digitalWrite(Ledpin2, LOW);
+      digitalWrite(Ledpin3, LOW);
+      Serial.print("eres muy alto con ");
+      Serial.println(myNumber);  
+ }
+ }
+ 
