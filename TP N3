@@ -1,0 +1,60 @@
+/* Realizar el diagrama de flujo y el código de programa para Arduino de un sistema de control que
+genere una secuencia de iluminación de 5 leds (conectadas a 5 salidas digitales) según se activen 2
+llaves a las entradas digitales de Arduino.
+Que responda a las siguientes condiciones:
+Si SW1 está activo (cerrado) que se enciendan los leds de derecha a izquierda. Ej. Primero led 4,
+segundo led 5, tercero led6, cuarto led7 y quinto led8. Luego apagar todos los leds.
+Si SW2 está activo (cerrado) que se enciendan los leds de izquierda a derecha. Ej. Primero led 8,
+segundo led7, tercero led6, cuarto led5 y quinto led4. Luego apagar todos los leds.
+Si ambos switch están en cero apagar todos los leds */
+
+int pin2 = 2;
+int pin3 = 3;
+int ledpin1 = 4;
+int ledpin2 = 5;
+int ledpin3 = 6;
+int ledpin4 = 7;
+int ledpin5 = 8;
+int e;
+void setup() {
+  pinMode(pin2, INPUT);
+  pinMode(pin3, INPUT);
+  pinMode(ledpin1, OUTPUT);
+  pinMode(ledpin2, OUTPUT);
+  pinMode(ledpin3, OUTPUT);
+  pinMode(ledpin4, OUTPUT);
+  pinMode(ledpin5, OUTPUT); 
+}
+void loop() {
+  int derecha = digitalRead(pin2);
+  int izquierda = digitalRead(pin3);
+  delay(100);
+ if(derecha == HIGH) {
+ for(e = ledpin1 ; e <= ledpin5 ; e = e+1) {
+  digitalWrite(e, HIGH);
+  delay(500); 
+  digitalWrite(e, LOW);
+  delay(500); 
+ }}
+ if(derecha == LOW) {
+  digitalWrite(ledpin1, LOW);
+  digitalWrite(ledpin2, LOW);
+  digitalWrite(ledpin3, LOW);
+  digitalWrite(ledpin4, LOW);
+  digitalWrite(ledpin5, LOW); 
+ }
+ if(izquierda == HIGH) {
+ for(e = ledpin5 ; e <= ledpin1 ; e = e-1) {
+  digitalWrite(e, HIGH);
+  delay(500); 
+  digitalWrite(e, LOW);
+  delay(500); 
+ }}
+ if(izquierda == LOW) {
+  digitalWrite(ledpin1, LOW);
+  digitalWrite(ledpin2, LOW);
+  digitalWrite(ledpin3, LOW);
+  digitalWrite(ledpin4, LOW);
+  digitalWrite(ledpin5, LOW); 
+ }
+ }
