@@ -1,0 +1,73 @@
+/* Realizar un control maestro-esclavo con protocolo I2C de manera que al presionar 4 pulsadores en el maestro se vean reflejados en 4 leds en el esclavo */
+
+#include <Wire.h>
+int ledpin0 = 2;
+int ledpin1 = 3;
+int ledpin2 = 4;
+int ledpin3 = 5;
+int ledpin4 = 6;
+int ledpin5 = 7;
+
+void setup() {
+  Wire.begin();
+  Serial.begin(9600);
+  pinMode(ledpin0, INPUT_PULLUP);
+  pinMode(ledpin1, INPUT_PULLUP);
+  pinMode(ledpin2, INPUT_PULLUP);
+  pinMode(ledpin3, INPUT_PULLUP);
+}
+void loop() {
+
+  Wire.beginTransmission(1);
+
+  int entrada0 = digitalRead(ledpin0);
+  int entrada1 = digitalRead(ledpin1);
+  int entrada2 = digitalRead(ledpin2);
+  int entrada3 = digitalRead(ledpin3);  
+  int entrada4 = digitalRead(ledpin4);
+  int entrada5 = digitalRead(ledpin5);
+  
+    if (entrada0 == LOW) {
+      Wire.write('1');
+      //delay(100);
+    } else {
+      Wire.write('0');
+      //delay(100);
+    }
+    if (entrada1 == LOW) {
+      Wire.write('2');
+      //delay(100);
+    } else {
+      Wire.write('0');
+      //delay(100);
+    }
+  if (entrada2 == LOW){
+      Wire.write('3');
+      //delay(100);
+    } else {
+      Wire.write('0');
+      //delay(100);
+    }
+  if (entrada3 == LOW){
+      Wire.write('4');
+      //delay(100);
+    } else {
+      Wire.write('0');
+      //delay(100);
+    }
+  if (entrada4 == LOW){
+      Wire.write('5');
+      //delay(100);
+    } else {
+      Wire.write('0');
+      //delay(100);
+    }
+   if (entrada5 == LOW){
+      Wire.write('6');
+      //delay(100);
+    } else {
+      Wire.write('0');
+      //delay(100);
+    }
+  Wire.endTransmission();
+}
