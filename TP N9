@@ -1,0 +1,57 @@
+//CREAR UNA LIBRERIA SIMPLE EN ARDUINO
+
+////////////////////
+
+/*Morsetest.cpp*/
+#include "Arduino.h"
+#include "MorseTest.h"
+MorseTest::MorseTest(int pin);
+{
+  pinMode (pin, OUTPUT);
+  _pin = pin;
+}
+void MorseTest::dot()
+{
+  digitalWrite(_pin, HIGH);
+  delay (250);
+  digitalWrite(_pin, LOW);
+  delay (250);
+}
+void MorseTest::dash()
+{
+  digitalWrite(_pin, HIGH);
+  delay (1000);
+  digitalWrite(_pin, LOW);
+  delay (250);
+}
+
+//////////////////////////////
+
+/*Morsetest.h*/
+#ifndef MorseTest_h
+#define MorseTest_h
+#include "Arduino.h"
+Class MorseTest
+  {
+  public:
+    Morsetest(int pin);
+    void dash();
+    void dot();
+  private:
+    int _pin;
+    };
+#endif
+
+///////////////////////////
+
+#include <MorseTest.h>
+
+MorseTest morsetest(13);
+ void setup()
+{}
+void loop()
+{
+morsetest.dot();morsetest.dot();morsetest.dot();
+morsetest.dash();morsetest.dash();morsetest.dash();
+morsetest.dot();morsetest.dot();morsetest.dot();
+}
