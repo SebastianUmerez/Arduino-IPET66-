@@ -1,0 +1,22 @@
+/* Realizar el código de programa para Arduino de un sistema de control que encienda o apague una
+luz (o led) según la condición de la luz ambiental, si esta es de baja luminosidad. Como sensor de
+luminosidad se utilizará un LDR (light dependent resistor) */
+
+int led = 12;
+int pin = A0;
+void setup() {
+ Serial.begin(9600);
+ pinMode(pin, INPUT);
+ pinMode(led, OUTPUT);
+}
+
+void loop() {
+  int LDR = analogRead(pin);
+  Serial.println(LDR);
+  delay(100);
+  if(LDR > 900) {
+  digitalWrite(led, HIGH);
+  }
+  else {
+  digitalWrite(led, LOW);
+}}
