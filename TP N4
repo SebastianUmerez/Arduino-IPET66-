@@ -1,0 +1,44 @@
+/* Realizar el código de un programa que calcule las raices de una ecuación cuadrática. Que se
+ingresen los coeficientes de la ecuación por el monitor serie, y se muestre los valores según, si las
+raices son reales y distintas, reales e iguales o imaginarias */
+
+  String numero1 = "el primer numero es ";
+  String numero2 = "el segundo numero es ";
+  String numero3 = "el tercer numero es "; 
+  String reales = "Las soluciones son: ";
+  String imaginario = "No hay soluciones reales";
+  String inicio;
+void setup() {
+  Serial.begin(9600); //abrir el monitor serie
+  Serial.println(inicio);
+}
+void loop() {
+   Serial.print(numero1); //aparecer el primer mensaje
+   while(Serial.available()== 0) {} //esperar hasta que llegue el numero
+   float a = Serial.parseFloat(); //cuadratico
+   Serial.println(a); // sale el numero 
+   /* se repite el mismo procedimiento con los otros numeros */
+   Serial.print(numero2);
+   while(Serial.available() == 0) {} 
+   float b = Serial.parseFloat(); //lineal
+   Serial.println(b);
+   Serial.print(numero3);
+   while(Serial.available() == 0) {}
+   float c = Serial.parseFloat();
+   Serial.println(c);
+   /*aplica la ecuacion ¨*/
+  float numero = b * b - 4 * a * c;
+  if (numero >= 0) { //Si hay soluciones reales
+    float x1 = (-b + sqrt(numero)) / (2 * a); // Calcula la primera solución
+    float x2 = (-b - sqrt(numero)) / (2 * a); // Calcula la segunda solución
+    Serial.print(reales);
+    Serial.print(x1);
+    Serial.print(" y ");
+    Serial.println(x2);
+    Serial.println(inicio);
+  } 
+  if (numero < 0) { // Si no hay soluciones reales
+    Serial.println(imaginario);
+    Serial.println(inicio);
+  }
+}
