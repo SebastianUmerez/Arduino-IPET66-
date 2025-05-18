@@ -1,0 +1,52 @@
+/* Realizar el diagrama de flujo y el código de un programa para Arduino que muestre un mensaje
+por el monitor serie y a través de 3 leds, que según la edad de la persona ingresada visualice: si la
+edad de la persona es menor que 16 años “no puede votar”, si está entre 16 y 17 años “puede votar
+pero no es obligatorio”, y si es mayor que 18 años es “obligatorio votar” */
+
+int Ledpin1 = 9;
+int Ledpin2 = 8;
+int Ledpin3 = 10;
+int myNumber;
+String Edad = "dime tu edad";
+String Edadjoven = "No tenes que votar con ";
+String Edadviejo = "tenes que votar con ";
+String Edadopcional = "Es opcional votar con ";
+ void setup() {
+  Serial.begin(9600);
+  pinMode(Ledpin1, OUTPUT);
+  pinMode(Ledpin2, OUTPUT);
+  pinMode(Ledpin3, OUTPUT); 
+ }
+ void loop() {
+   Serial.println(Edad);
+   while(!Serial.available() > 0);  
+   myNumber = Serial.parseInt();
+  if(myNumber<16) {
+      digitalWrite(Ledpin1, HIGH);
+      digitalWrite(Ledpin2, LOW);
+      digitalWrite(Ledpin3, LOW);
+      Serial.print(Edadjoven);
+      Serial.println(myNumber);
+    }
+    if(myNumber>=18) {
+      digitalWrite(Ledpin1, LOW);
+      digitalWrite(Ledpin2, HIGH);
+      digitalWrite(Ledpin3, LOW);
+      Serial.print(Edadviejo);
+      Serial.println(myNumber); 
+    } 
+    if(myNumber==16) {
+      digitalWrite(Ledpin1, LOW);
+      digitalWrite(Ledpin2, LOW);
+      digitalWrite(Ledpin3, HIGH);
+      Serial.print(Edadopcional);
+      Serial.println(myNumber);
+   }
+   if(myNumber==17) {
+      digitalWrite(Ledpin1, LOW);
+      digitalWrite(Ledpin2, LOW);
+      digitalWrite(Ledpin3, HIGH);
+      Serial.print(Edadopcional);
+      Serial.println(myNumber); 
+   }   
+ }
