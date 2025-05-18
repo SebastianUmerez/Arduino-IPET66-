@@ -1,0 +1,30 @@
+/* Realizar el código de programa para Arduino de un sistema de control que encienda o apague un
+ventilador (a través de un relé) según la temperatura ambiente. Se puede usar como sensor de
+temperatura un DHT11/22, un LM35 o un NTC (negative temperature coeficiente).
+Que responda a las siguientes condiciones:
+Si la temperatura es mayor o igual a 30oC encender el ventilador.
+Si la temperatura es menor a 26oC apagar el ventilador. */
+
+float temperatura; 
+int sensor;
+int motor = 11;
+int e;
+void setup() {
+  Serial.begin(9600);
+  pinMode(motor, OUTPUT);
+}
+void loop() {
+  sensor = analogRead(A0);
+  temperatura = ((sensor * 5000.00) / 1023) / 10;
+  Serial.println (temperatura);
+  delay(500);
+  if(temperatura > 24.00) {
+  for (e = 0; e < 10; e++) {
+  digitalWrite(motor, LOW);
+  delay(2500);
+  } }
+   else {
+  digitalWrite(motor, HIGH);
+  delay(2500);
+  }
+}
