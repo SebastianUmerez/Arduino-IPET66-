@@ -1,0 +1,37 @@
+/* Realizar el código de un programa que permita escribir y leer un código de seguridad de 8 cifras
+en el EEPROM del Arduino */
+
+#include <EEPROM.h>
+int e;
+char password[] = {1,2,3,4,5,6,7,8};
+int codigo = 9; // Tamaño máximo de la contraseña
+String inicio;
+void setup() {
+  Serial.begin(9600);
+}
+void loop() {
+  Serial.println(inicio);
+  Serial.println("Ingrese 1 para escribir, o 2 para leer: ");
+  while (Serial.available() == 0) {}
+  int opcion = Serial.parseInt();
+
+  if (opcion == 1) {
+    Serial.println("Ingresar una palabra de 8 caracteres:");
+    while (Serial.available() == 0) {} // trucazo
+    for (int e = 0; e < codigo; e++) {
+      password[e] = Serial.read(); //leer el password
+      EEPROM.write(e, password[e]); // escribe el password en la memoria 
+    }
+    Serial.println("Caracteres ya escrito en la memoria");
+    Serial.println(inicio);
+  } 
+  if (opcion == 2) {
+    /*Leer los caracteres almacenada en la memoria EEPROM*/
+    for (int e = 0; e < codigo; e++) {
+      password[e] = EEPROM.read(e); //leer el password almacenado en la memoria
+    }
+    Serial.println("Los caracteres almacenado en la memoria EEPROM son:");
+    Serial.println(password); //muestra el passowrd
+    Serial.println(inicio);
+  }
+}
