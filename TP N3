@@ -8,53 +8,64 @@ Si SW2 está activo (cerrado) que se enciendan los leds de izquierda a derecha. 
 segundo led7, tercero led6, cuarto led5 y quinto led4. Luego apagar todos los leds.
 Si ambos switch están en cero apagar todos los leds */
 
-int pin2 = 2;
-int pin3 = 3;
-int ledpin1 = 4;
-int ledpin2 = 5;
-int ledpin3 = 6;
-int ledpin4 = 7;
-int ledpin5 = 8;
-int e;
+int ledpin4=4;
+int ledpin5=5;
+int ledpin6=6;
+int ledpin7=7;
+int ledpin8=8;
+int SW3=3;
+int SW2=2;
 void setup() {
-  pinMode(pin2, INPUT);
-  pinMode(pin3, INPUT);
-  pinMode(ledpin1, OUTPUT);
-  pinMode(ledpin2, OUTPUT);
-  pinMode(ledpin3, OUTPUT);
-  pinMode(ledpin4, OUTPUT);
-  pinMode(ledpin5, OUTPUT); 
+pinMode(SW3,INPUT);
+pinMode(SW2,INPUT);
+pinMode(ledpin4,OUTPUT);
+pinMode(ledpin5,OUTPUT);
+pinMode(ledpin6,OUTPUT);
+pinMode(ledpin7,OUTPUT);
+pinMode(ledpin8,OUTPUT);
+
 }
+
 void loop() {
-  int derecha = digitalRead(pin2);
-  int izquierda = digitalRead(pin3);
-  delay(100);
- if(derecha == HIGH) {
- for(e = ledpin1 ; e <= ledpin5 ; e = e+1) {
-  digitalWrite(e, HIGH);
-  delay(500); 
-  digitalWrite(e, LOW);
-  delay(500); 
- }}
- if(derecha == LOW) {
-  digitalWrite(ledpin1, LOW);
-  digitalWrite(ledpin2, LOW);
-  digitalWrite(ledpin3, LOW);
-  digitalWrite(ledpin4, LOW);
-  digitalWrite(ledpin5, LOW); 
- }
- if(izquierda == HIGH) {
- for(e = ledpin5 ; e <= ledpin1 ; e = e-1) {
-  digitalWrite(e, HIGH);
-  delay(500); 
-  digitalWrite(e, LOW);
-  delay(500); 
- }}
- if(izquierda == LOW) {
-  digitalWrite(ledpin1, LOW);
-  digitalWrite(ledpin2, LOW);
-  digitalWrite(ledpin3, LOW);
-  digitalWrite(ledpin4, LOW);
-  digitalWrite(ledpin5, LOW); 
- }
- }
+if(digitalRead (SW3)== HIGH && digitalRead (SW2) == LOW    ){
+digitalWrite(ledpin4,HIGH);
+delay(500);
+digitalWrite(ledpin5,HIGH);
+delay(500);
+digitalWrite(ledpin6,HIGH);  
+delay(500);
+digitalWrite(ledpin7,HIGH);
+delay(500);
+digitalWrite(ledpin8,HIGH);
+delay(500);
+
+
+digitalWrite(ledpin4,LOW);
+digitalWrite(ledpin5,LOW);
+digitalWrite(ledpin6,LOW);
+digitalWrite(ledpin7,LOW);
+digitalWrite(ledpin8,LOW);
+delay(500);
+
+}
+if(digitalRead(SW2)==HIGH && digitalRead(SW3)==LOW){
+digitalWrite(ledpin8,HIGH);
+delay(500);
+digitalWrite(ledpin7,HIGH);
+delay(500);
+digitalWrite(ledpin6,HIGH);  
+delay(500);
+digitalWrite(ledpin5,HIGH);
+delay(500);
+digitalWrite(ledpin4,HIGH);
+delay(500);
+
+digitalWrite(ledpin8,LOW);
+digitalWrite(ledpin7,LOW);
+digitalWrite(ledpin6,LOW);
+digitalWrite(ledpin5,LOW);
+digitalWrite(ledpin4,LOW);
+delay(500);
+}
+}
+
